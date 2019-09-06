@@ -21,3 +21,25 @@ Objetivos
 - Tener un set de herramientas que dominas.
 - Ética / Profesionalismo
 - Experiencia.
+
+## Proyecto
+MediaPlayer para Platzi Live con desarollo de plugins.
+
+- Inicio
+$ npm init -y
+Con el -y se contestan las preguntas en YES
+
+$ npm i -D live-server
+i: install
+D: Desarrollo
+
+- En el script del package json se agrega
+"scripts": {
+  "start": "live-server"
+}
+- Para correrlo
+$ npm start
+
+
+
+
