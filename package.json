@@ -1,0 +1,24 @@
+{
+  "name": "js-pro",
+  "version": "1.0.0",
+  "description": "Javascript puro, repasando los fundamentos clave del lenguaje, explorando APIs del DOM, implementando TypeScript y aplicando las mejores prácticas con Patrones de Diseño.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmayai/js-pro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmayai/js-pro/issues"
+  },
+  "homepage": "https://github.com/lmayai/js-pro#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
