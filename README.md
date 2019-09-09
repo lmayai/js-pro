@@ -71,4 +71,6 @@ Variables definidas dentro de un bloque, por ejemplo variables declaradas dentro
 Module Scope
 Cuando se denota un script de tipo module con el atributo type="module las variables son limitadas al archivo en el que están declaradas.
 
+<script type="module" src="assets/index.js"></script>
+
 
