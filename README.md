@@ -78,4 +78,15 @@ Son funciones que regresan una función o un objeto con funciones que mantienen 
 
 Los closures nos sirven para tener algo parecido a variables privadas, característica que no tiene JavaScript por default. Es decir encapsulan variables que no pueden ser modificadas directamente por otros objetos, sólo por funciones pertenecientes al mismo.
 
+## this
+this se refiere a un objeto, ese objeto es el que actualmente está ejecutando un pedazo de código.
+
+No se puede asignar un valor a this directamente y este depende de en que scope nos encontramos:
+
+- Cuando llamamos a this en el Global Scope o Function Scope, se hace referencia al objeto window. A excepción de cuando estamos en strict mode que nos regresará undefined.
+- Cuando llamamos a this desde una función que está contenida en un objeto, this se hace referencia a ese objeto. Excepto si la funcion se transifere y es independiente.
+- Cuando llamamos a this desde una “clase”, se hace referencia a la *instancia* generada por el constructor.
+
+Nota: aunque no sepuede asignar this directamente, cuando se llama una funcion si se puede asignar el this directamente dentro del llamado
+
 
