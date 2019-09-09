@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>call apply bind</title>
+  </head>
+
+  <body>
+    <a href="../index.html">HOME</a>
+    <ul>
+      <li>
+        <button class="call-to-action">Aprender</button>
+      </li>
+      <li>
+        <button class="call-to-action">Aprender Mas</button>
+      </li>
+      <li>
+        <button class="call-to-action">Nunca parar</button>
+      </li>
+    </ul>
+    <script>
+      //**** Establece this usando call
+      function saludar() {
+        console.log(`Hola soy ${this.name} ${this.lastname}`);
+      }
+      //Con call se establece cual es el this
+      const richard = {
+        name: "Richard",
+        lastname: "Jones"
+      };
+
+      saludar.call(richard)
+
+      //this y call con argumentos
+      function caminar (metros, direccion){
+        console.log(`${this.name} camina ${metros} hacia el ${direccion}`)
+      }
+
+      caminar.call(richard,400,'norte')
+
+      //apply
+      // hace lo mismo que call pero se pasan diferente los args
+      caminar.apply(richard, [300, "sur"])
+      const valores = [800, "sur"]
+      caminar.apply(richard, valores)
+
+      //Pra no confundirlo
+      /*
+        CAll - comas
+        Apply - arrays
+      */
+
+      // USANDO bind
+      const daniel = { name: 'Daniel' , lastname: 'Sánchez'}
+      saludar.bind(daniel)
+      // Falta llamarlo
+      const danielSaluda = saludar.bind(daniel)
+      danielSaluda();
+
+      const danielCamina = caminar.bind(daniel)
+      danielCamina(100, 'este')
+
+      //Otra forma de pasar args
+      const danielCamina2 = caminar.bind(daniel, 1000, 'oeste')
+      danielCamina2()
+
+      //Esta tecnica se llama cury, parapreestablecer valores
+      const danielCamina3 = caminar.bind(daniel, 700 )
+      danielCamina3('noreste')
+
+      // CUANDO ES UTIL USAR ESTOS metodos
+      const buttons = document.getElementsByClassName('call-to-action')
+      // buttons.forEach(button => {
+      //   button.onclick = () => alert('Nunca pares de aprender')
+      // });
+
+      //Buttons es un nodeList, se parece pero no es un arreglo 
+      Array.prototype.forEach.call(buttons,button => {
+        button.onclick = () => alert('Nunca pares de aprender')
+      })
+      // Ya funcona por que se usó buttons como contexto
+
+
+    </script>
+  </body>
+</html>
