@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PRotos</title>
+</head>
+<body>
+  <a href="../index.html">HOME</a>
+  
+  <script>
+    //Objeto comun
+    const goku = {
+      name: 'goku'
+    }
+    goku.saludar = function () {
+      console.log(`HOla soy ${this.name}`)
+    }
+
+    goku.saludar()
+  
+    const veggeta = {
+      name: 'veggeta'
+    }
+    veggeta.saludar = function () {
+      console.log(`HOla soy ${this.name}`)
+    }
+
+    veggeta.saludar()
+    // Es infeciente
+
+    /*function Hero( ) {
+      const hero = {
+        name: name
+      }
+
+      hero.saludar = function () {
+        console.log(`HOla soy ${this.name}`)
+      }
+
+      return hero;
+    }
+  
+    const zelda = Hero('Zelda')
+    zelda.saludar()
+    
+    const link = Hero('Link')
+    link.saludar()*/
+    // Pero siguee la ineficiencia ya que se llama cada vez y se crea la funcion saludar
+
+    // Se mejora maaas
+    /*const heroMethods = {
+      saludar: function () {
+        console.log(`Me llamo ${this.name}`)
+      }
+    }
+    function Hero(name) {
+      const hero = {
+        name: name
+      }
+      hero.saludar = heroMethods.saludar;
+      return hero;
+    }
+  
+    const zelda = Hero('Zelda')
+    zelda.saludar()
+    
+    const link = Hero('Link')
+    link.saludar()*/
+
+    // Object.create
+    //const nuevoObjeto = Object.create(objeto)
+    /*const heroMethods = {
+      saludar: function () {
+        console.log(`Soy supeheroe ${this.name}`)
+      }
+    }
+    function Hero(name) {
+      const hero = Object.create(heroMethods)
+      hero.name = name;
+      return hero;
+    }
+  
+    const zelda = Hero('Zelda')
+    zelda.saludar()
+    
+    const link = Hero('Link')
+    link.saludar()*/
+
+    //Al definir un nuevo objeto este hereda sus protos.
+    /*function Hero(name) {
+      const hero = Object.create(Hero.prototype)
+      hero.name = name;
+      return hero;
+    }
+
+    Hero.prototype.saludar = function () {
+      console.log(`Soy super duper ${this.name}`)
+    }
+
+    const zelda = Hero('Zelda')
+    zelda.saludar()
+    
+    const link = Hero('Link')
+    link.saludar()*/
+
+    //Ahora se usa new, sugar syntax para object create
+    function Hero(name) {
+      //const hero = Object.create(Hero.prototype) lo hace automatico
+      this.name = name;
+      //return this; implicito
+    }
+
+    Hero.prototype.saludar = function () {
+      console.log(`Newww  ${this.name}`)
+    }
+
+    const zelda = new Hero('Zelda')
+    zelda.saludar()
+    
+    const link = new Hero('Link')
+    link.saludar()
+
+/**/ // AHORA CON HERENCIA PROTOTIPAL
+    console.log('Name;', zelda.name)
+
+    // Has own property
+    console.log('zelda.hasOwnProperty("name")', zelda.hasOwnProperty("name"))
+    console.log('zelda.hasOwnProperty("saludar")', zelda.hasOwnProperty("saludar"))
+    // saludar lo tomó de hero
+
+    // Para obtener el proto
+    const protosZelda = Object.getPrototypeOf(zelda)
+    console.log(Object.getPrototypeOf(zelda))
+    // protosZelda === Hero.prototype //tienen la misma referencia!!
+    // Siemore busca primero en sus props y luego en sus siguientes protos hasta llegar al object
+
+  
+  </script>
+
+</body>
+</html>
