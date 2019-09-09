@@ -112,3 +112,170 @@ Cuando se llama a una función o variable que no se encuentra en el mismo objeto
 
 La función hasOwnProperty sirve para verificar si una propiedad es parte del objeto o si viene heredada desde su prototype chain.
 
+## Parsers y el Abstract Syntax Tree
+El JS Engine recibe el código fuente y lo procesa de la siguiente manera:
+
+El parser descompone y crea tokens que integran el AST (abstract sintx tree, l cual representa el programa en una estructura).
+Se compila a bytecode y se ejecuta.
+Lo que se pueda se optimiza a machine code y se reemplaza el código base.
+Un SyntaxError es lanzado cuando el motor JavaScript encuentra partes que no forman parte de la sintaxis del lenguaje y esto lo logra gracias a que se tiene un AST generado por el parser.
+
+El parser es del 15% al 20% del proceso de ejecución por lo que hay que usar parser del código justo en el momento que lo necesitamos y no antes de saber si se va a usar o no.
+
+- Que hace el parser? El parser toma el código fuente, luego genera tokens al descomponer el código y los pasa a AST(Abstract syntax tree)
+SI lo hace mal es cuando se lanza un syntax error: Este es lanzadocuando el motor de JS se encuentra en partes del código que no forman parte de la sintaxis del lenguaje al momento de analizar el codigo. Ya que el lenguaje es estricto.
+
+El proceso de parsing es importante que se haga bien! 15 a 20% del tiempo de ejecución.
+La mayoria del Js en una pagina nunca se ejecuta (debe empaquetarse bien!)
+Hace que sea importante bundling y code sppliting
+
+PArser V8 (Motor de chromo y node): 
+Eager parsing
+- Encuntra errores de sintaxis
+- Crea el AST
+- Construye scopes
+
+Lazy parsing
+- Doble de rapido que el eager parses
+- No crea el AST
+- Construye los scopes parcialmente
+
+TOKENS DEMO:
+Para ver como funciona el TOKENs 
+
+AST DEMO
+https://astexplorer.net/
+Es un grafo (estructura de datos) qe representa un programa
+
+Se una en:
+- Js Engine
+- Bundlers: webpack, rollup, parcel
+- TRanspiler: babel
+- Linters: ESLINT, prettify
+- Type checkers: typescript, flow
+- Syntax highlighters
+
+## EST explorer
+Si se quiere hacer algo como lo que hace ESLINT que resalta errores, esto se puede hacer con AST explorer
+
+- Para el codigo
+const pi = 3.1416;
+
+- Si el código solo admite variables en Mayus, y luego reemplaza las minúsculas:
+```js
+export default function(context) {
+  return {
+	VariableDeclaration(node){
+      if (node.kind === 'const') {
+		const declaration = node.declarations[0];
+        //Se asegura que el valor es un npumero
+        if (typeof declaration.init.value === 'number') {
+          if ( declaration.id.name !== declaration.id.name.toUpperCase()){
+          	context.report({
+              node: declaration.id,
+              message: 'El nombre de la constante debe de estar en mayúsculas',
+              fix: function(fixer) {
+            	  return fixer.replaceText(declaration.id, declaration.id.name.toUpperCase())	
+              }
+            })
+          }
+        }
+      }
+    }
+  };
+};
+```
+
+- La salida será:
+```js
+// El nombre de la constante debe de estar en mayúsculas (at 1:7)
+   const pi = 3.1416;
+// ------^
+
+// Fixed output follows:
+// --------------------------------------------------------------------------------
+const PI = 3.1416;
+```
+
+## Que hace el JS engine
+- Recibe el cod. fuente.
+- Parsea el cod y produce el ATS
+- Se compila el bytecode y se ejecuta
+- Se optimiza a machine code y se reemplaza el código base
+
+Mientras el cod se ejecuta hay un observador tomando notas. Luego de tener notas es capaz de tomar conclusiones y optimizar.
+
+Bytecode vs Machine code
+Butecode se parece a assembly, es portatil, y lo ejecuta una virtual machine.
+Machine es binerios, tiene instrucciones especificas a una arquitectura o procesador. Es el unico leido por estos.
+
+Siempre se pasa a machine code.
+
+Its a hot function luego que un codigo siemopre se ejecuta y puede optimizare a machine code, luego de que estaba en un bytecode
+
+, Es posible luego hacer que la ehecucion se de optimice, por tal es bueno que a llamados de funciones siempre se les pase los mismos tipos de objetos
+
+-  Cada brwser tiene una implementacion
+Firefox:  Usa spiderMonkey tiene 2 capas de optimizacion
+Edge: Chakra tambipen
+Safari: JavaScriptCore: Tiene 3 capsa de optimizacion -> Costo beneficio: Tarda mas en comenzar, peoro luego que se arranque ejecua mas rapidamente.
+
+Todos funcionas diferentes, todos los motores.
+
+## Event loop
+Hace parecer JS multihilo, ero en realidad es de un solo hilo.
+Usa el Stack y el memory Heap 
+
+Stak: en la pila se van poniendo tareas al hacersele un push, poniendole tareas. Se le hacen pop 
+Aqui estan las funcones normalmente y se almmacena el scope. 
+
+Para tareas sincronas siempre se ejecuta en un orden , donde sincronamente se hacen push al stack y pop.
+Cuando es asincrono se van ingresando al stack cuando le toque
+
+En el stack lo primero que entra es lo ultimo que sale.
+
+Para entender el asincronismo se tiene queue(colas) Donde lo primero que entra es lo primero que sale. Es como hacer una fila, el primero que llega es el que atienden
+
+Cuando es asincronico, se usa la cola de tareas. Pasa de tareas agendadas al task queue, y luego al stack.
+
+Esto lo hace el event-loop, el cual es el programa que revisa si hay tareas pendientes en el queue y lo pasa al stack y tambien revisas si esta vacio el stack.
+Si esta vacio pasa del task queue al stack.
+
+Si está ocupado -> espera que se ejecute todo en el stack y louego lo toma del queue al stack. Siemore espera a que este vacio el stack. POrtal el asincronimsm ayuda a la ejecucion de las tareas sin bloquearlo. siempre la idea es que el stack este vacio.
+
+Llegan las promesas: donde se dice que algo eventalemente ocurrirá.
+Las promesas van en otra cola. es la microtasks queue
+
+Se agendan primero del microtaks y luego de las schedule
+
+- Para el sgte programa, como es la salida en consola
+``` js
+function moreAsync() {
+  console.log('Start')
+  setTimeout( () => console.log('SetTimeout',0))
+  Promise.resolve("PR1").then(msg => console.log(msg))
+  Promise.resolve("PR2").then(msg => console.log(msg))
+  console.log('End')
+}
+moreAsync()
+```
+
+- La salida será:
+```
+Start
+End
+PR1
+PR2
+SetTimeout
+```
+
+Las microtareas tienen preferencias.
+El event-loop es esa magia que se encarga de hacer parecer que es multihilo, pero en realidad orquesta la ejecucion asincrona de tareas.
+
+Nunca bloquear el event-loop.
+
+
+
+
+
+
