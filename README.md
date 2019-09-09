@@ -73,4 +73,9 @@ Cuando se denota un script de tipo module con el atributo type="module las varia
 
 <script type="module" src="assets/index.js"></script>
 
+## Closures
+Son funciones que regresan una función o un objeto con funciones que mantienen las variables que fueron declaras fuera de su scope.
+
+Los closures nos sirven para tener algo parecido a variables privadas, característica que no tiene JavaScript por default. Es decir encapsulan variables que no pueden ser modificadas directamente por otros objetos, sólo por funciones pertenecientes al mismo.
+
 
