@@ -371,7 +371,7 @@ EJM: cra una clases donde cualquier objeto puede subscribirse y desuscribirse a 
 
 ## EJEMPLOS
 
-### SINGLETON: 
+### PAtrón SINGLETON: 
 Patron que asegura que una clase solo tendrá una instancia. Donde está instancia puede ser consumida por cualquier otro objeto.
 UML: 
 - Nombre clase:
@@ -382,4 +382,74 @@ UML:
 Una analogia: En un pais hay varios partidos, pero solo un gobierno
 
 Mongoose: ORM ayuda a interactuar con una db de mongoDB. Provee una interfaz simple para buscar,e scrbir y validar datos. PAra esta libreria solo se quiere tener una instancia.
+
+## Patron observer
+- Con este permite suscribirse o no a servicios y acciones en las cuales uno está pendiente o requiere. 
+- Sujetos y observadores.
+Sujerto expone el mecanismo de suscripción, donde este expone info a todos los suscriptores(observadores). Luego el observador siempre podrá desuscribirse.
+
+En SW permite crear código desacoplado. 
+El observador requiere un metodo update, para poder notificarlos. y como argumento envia la inf.
+USADO en newsletter.
+
+- REdux utiliza el patrón observer, la cual maneja un estado. Se tiene un store con un estado y un reducer(reciben acciones que modifican el estado.)
+Cuando cambia el estado se notifica a los subscritos
+
+Las acciones se despachan al ejecutarse una acción.
+
+- Event Emitter
+emmiter.on .off .emit ->
+
+ECMA Observable
+Aun está en STAGE 1 para implementarlo
+
+## DECORATOR (Patrón estructural)
+VAs a una tienda a comprar un pc y hay 2 o muchaaas!
+De la MAC se implementa cada una, como una clase general y se genera cada una! (hacer cada una sería muchaas)
+
+Class MAC
+
+Class MAc1
+Class Mac2
+... hasta las necesarias
+
+Si hay cambios toca cambiar uno por uno
+
+"Una entidad de SW (clase, modulo, funcion, etc) debe quedar abierta oara su extensión, pero cerrada para su modificación"
+Principio de abierto y cerrado.
+
+DECORATOR: Patron estructural que le añade responsabilidades a un objeto de forma dinámica. No ir a la calsa y cambarlo
+Nos permite extender funcionalidad sin tener que usar subclases.
+
+Técnica MonkeyPatching
+
+```js
+class Mac{
+  constructo() {
+    this.memory = 10
+  }
+  cost() { retunr 100}
+}
+
+
+function withMemory(compu) {
+  cost = compu.cost()
+  pc.cost = function  () {
+    memory = cost + 123123
+    return cost + memoryCost
+  }
+}
+
+const pc = new Mac()
+withMemory(pc)
+```
+
+Tambien está: clausures, herencia prototipal, middleware. ECAM scrip decorators
+
+EJM Lodash.memoize - trae funcio y regresa una nueva
+
+El decorator extiende la funcionalidad de clases, agregando funcionalidades
+
+Open clase principle, cerrada a modificar pero abuerta a ser extendido.
+
 
