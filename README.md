@@ -339,5 +339,15 @@ Muy usados en las Progressive Web Apps (PWA) los ServiceWorkers son una capa que
 Parecido a como lo hacen los proxys van a interceptar peticiones para guardar el resultado en cache y la próxima vez que se haga la petición tomar del cache ese resultado.
 
 
+# TypeSCript
+
+## Introducción
+TypeScript es un superset de JavaScript que añade tipos a nuestras variables ayudando así a la detección de errores de forma temprana y mejorando el autocompletado.
+
+Los navegadores no entienden TypeScript así que lo vamos a transpilar a JavaScript usando Parcel.
+npm install -D parcel-bundler
+
+npm -rf .\.cache\ .\dist\
+
 
 
