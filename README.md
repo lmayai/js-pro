@@ -318,3 +318,17 @@ Algunas de sus características:
 La peticiones AJAX permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función fetch para esto.
 
 Con fetch tenemos algo llamado AbortController que nos permite enviar una señal a una petición en plena ejecución para detenerla.
+
+## IntersectionObserver
+Sirve para observar elementos y si cruzan un umbral que nosotros definimos nos lo va a notificar para tomar acción.
+Con esto se puede saber si el video es visible ono y detenerno y hacer acciones
+Viene directamente del DOM. Notifica por medio de umbrales
+
+## VisibilityChange
+El visibilityChange forma parte del API del DOM llamado Page Visibility y nos deja saber si el elemento es visible, pude ser usado para ejecutar una acción cuando cambiamos de pestaña. Así podemos ahorrar batería y mejorar la UX.
+
+document.addEventListener("visibilityChange", () => {
+  console.log(document.visibilityState)
+})
+
+
