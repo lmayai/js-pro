@@ -349,8 +349,9 @@ npm install -D parcel-bundler
 
 npm -rf .\.cache\ .\dist\
 
-###Interfaces
+### Interfaces
 Nos permiten declarar la forma exacta de un objeto, definiendo los tipos de sus propiedades y si son opcionales o no.
 
-
+### Clases
+En las clases en TypeScript sí existen las propiedades privadas.
 
