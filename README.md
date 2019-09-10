@@ -355,3 +355,31 @@ Nos permiten declarar la forma exacta de un objeto, definiendo los tipos de sus 
 ### Clases
 En las clases en TypeScript sí existen las propiedades privadas.
 
+## Pasar proyecto a TS
+
+# Patrones de diseño:
+
+## Que son:
+Son recetas que resuelven problemas en el diseño de SW.
+Una solucion a un problema dentro de un cotexto recurrente que pasa muchas veces.
+
+Ejm: Muchos objetos interesados en el estado de otro objeto.
+- EJm quienren recibir notificacion cuando cambie el estado.
+
+La solucion debe ser generica.
+EJM: cra una clases donde cualquier objeto puede subscribirse y desuscribirse a cambios en el estado.
+
+## EJEMPLOS
+
+### SINGLETON: 
+Patron que asegura que una clase solo tendrá una instancia. Donde está instancia puede ser consumida por cualquier otro objeto.
+UML: 
+- Nombre clase:
+- privados: instance singleton
+- privado: singleton() constructor
+- publico: getInstance() revisa si ya existe una instancia, sino la crea
+
+Una analogia: En un pais hay varios partidos, pero solo un gobierno
+
+Mongoose: ORM ayuda a interactuar con una db de mongoDB. Provee una interfaz simple para buscar,e scrbir y validar datos. PAra esta libreria solo se quiere tener una instancia.
+
