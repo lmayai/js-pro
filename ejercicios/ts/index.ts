@@ -50,6 +50,34 @@ let someO:object = {
   t: 'o'
 }
 
+// Funciones - se pone el tipo que regresa
+function sum(a:number , b:number):number {
+  return a+b
+}
+
+sum(3, 5);
+
+function createAdder(a:number ): (number)=>number{
+  return function(b:number){
+    return b+a
+  }
+}
+
+const addFour = createAdder(4);
+const fourPlus = addFour(6)
+
+//Opcionales params
+function fullname(f:string, l?:string): string {
+  return `${f} ${l}`
+}
+
+//Por omision
+function fullname2(f:string, l:string = 'Smith'): string {
+  return `${f} ${l}`
+}
+
+const ric = fullname('f');
+
 
 
 
